@@ -1,0 +1,89 @@
+*****************.propertise & .yml**********************
+Trong Spring Boot, bạn có thể cấu hình ứng dụng của mình thông qua các tệp cấu hình như 
+application.properties hoặc application.yml. Các tệp cấu hình này cung cấp các thông số 
+cấu hình cho ứng dụng của bạn như cổng mạng, cấu hình cơ sở dữ liệu, các tài nguyên tĩnh,
+ và nhiều hơn nữa.
+
+Các tệp cấu hình được tìm kiếm theo thứ tự ưu tiên từ cao đến thấp. Ví dụ, các tệp cấu 
+hình được đặt trong thư mục config của ứng dụng sẽ được ưu tiên hơn các tệp cấu hình 
+trong thư mục gốc của ứng dụng. Các tệp cấu hình có thể ghi đè các thông số cấu hình 
+trong các tệp cấu hình khác.
+
+Định dạng .properties sử dụng cú pháp key-value, trong đó các giá trị được phân cách 
+bằng dấu =. Ví dụ:
+server.port=8080
+spring.datasource.url=jdbc:mysql://localhost:3306/mydatabase
+Định dạng YAML sử dụng cú pháp indentation (thụt lề) để biểu diễn các 
+cấu trúc dữ liệu phức tạp hơn. Ví dụ:
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydatabase
+Một số điểm khác nhau khác giữa các định dạng này bao gồm:
+
+.properties chỉ hỗ trợ các giá trị thuộc kiểu String, trong khi YAML hỗ trợ các kiểu
+ dữ liệu khác nhau như số, boolean, null, và thậm chí các cấu trúc dữ liệu phức tạp hơn
+ như mảng và đối tượng.
+
+YAML cho phép bạn sử dụng comment (chú thích) để giải thích ý nghĩa của các giá trị cấu 
+hình, trong khi .properties không cho phép chú thích.
+
+YAML cho phép sử dụng nhiều dòng để biểu diễn các cấu trúc dữ liệu phức tạp hơn,
+trong khi .properties chỉ hỗ trợ một dòng duy nhất cho mỗi giá trị.
+
+***********************Controller & RestController*******************
+@Controller và @RestController là hai annotation được sử dụng trong Spring để xử lý các 
+request HTTP từ người dùng và trả về các response tương ứng.
+
+@Controller: được sử dụng để đánh dấu một class là một Spring MVC Controller, đây là 
+cách cổ điển để xử lý các request HTTP trong Spring. Khi sử dụng @Controller, các phương 
+thức xử lý request trả về một chuỗi ký tự, đại diện cho tài nguyên được yêu cầu (ví dụ: 
+trang HTML, JSON, XML).
+
+@RestController: được sử dụng để đánh dấu một class là một RESTful controller, tương tự 
+như @Controller. Tuy nhiên, @RestController cũng sử dụng các annotation khác để biểu thị 
+kiểu dữ liệu của response trả về (ví dụ: @ResponseBody, @ResponseStatus) và tự động 
+chuyển đổi các đối tượng Java thành các định dạng dữ liệu phổ biến như JSON hoặc XML.
+
+Với @RestController, các phương thức xử lý request trả về trực tiếp đối tượng Java, 
+thường là một đối tượng được chuyển đổi thành JSON hoặc XML bởi thư viện Jackson hoặc
+ JAXB. Điều này giúp cho việc xây dựng các RESTful web service trở nên đơn giản và 
+dễ dàng hơn.
+
+Tóm lại, @Controller được sử dụng để xử lý các request HTTP truyền thống và trả về các 
+tài nguyên dưới dạng chuỗi ký tự, trong khi @RestController được sử dụng để xử lý các 
+request HTTP cho RESTful web service và trả về các đối tượng Java được chuyển đổi thành 
+JSON hoặc XML.
+
+**********************Main application*********************
+Trong Spring Boot, phương thức main() được sử dụng để khởi động ứng dụng, tải cấu hình 
+và khởi tạo các bean và tài nguyên cần thiết cho ứng dụng.
+
+Khi chạy ứng dụng Spring Boot, luồng xử lý của phương thức main() sẽ bao gồm các bước sau:
+
+Phương thức main() được gọi và tải cấu hình ứng dụng.
+
+Spring Boot sẽ tìm kiếm các bean cần thiết để khởi tạo trong ứng dụng và tạo chúng.
+
+Spring Boot sẽ khởi tạo các cấu hình đặc biệt của Spring Boot, chẳng hạn như các tài 
+nguyên cấu hình, giải quyết các phụ thuộc, khởi tạo các bean thứ tự đặc biệt, v.v.
+
+Spring Boot sẽ khởi động các ứng dụng con hoặc các dịch vụ cần thiết trong ứng dụng.
+
+Ứng dụng được khởi động và chạy.
+
+Khi ứng dụng chạy, Spring Boot sẽ quản lý các bean và tài nguyên trong ứng dụng và 
+cung cấp chúng cho các phương thức khác trong ứng dụng khi được yêu cầu. Các luồng xử 
+lý và các sự kiện trong ứng dụng sẽ được quản lý bởi Spring Boot và được xử lý bởi các 
+bean và tài nguyên được đăng ký trong ứng dụng.
+
+*************************LOMBOK*************************
+Lombok là một thư viện mã nguồn mở của Java, được sử dụng để giảm thiểu lượng mã lặp và 
+tăng tính dễ đọc và dễ bảo trì của mã nguồn. Lombok cung cấp một số annotation để tự động
+ tạo các phương thức và các phần khác của lớp, như getter/setter, constructor, 
+hashCode/equals, toString, v.v.
+
+Việc sử dụng Lombok giúp giảm thiểu lượng mã lặp và giúp cho mã nguồn của bạn trở nên 
+sáng sủa, ngắn gọn và dễ đọc hơn, đồng thời cải thiện năng suất và hiệu quả trong quá 
+trình phát triển.
