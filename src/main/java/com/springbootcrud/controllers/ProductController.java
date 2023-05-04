@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springbootcrud.entities.ProductEntity;
-import com.springbootcrud.services.implement.IProductService;
+import com.springbootcrud.data.entity.*;
+import com.springbootcrud.services.IProductService;
 
 @RestController
-@RequestMapping("v1/api/product/")
+@RequestMapping("api/v1/product/")
 public class ProductController {
 
 	@Autowired
@@ -33,24 +33,23 @@ public class ProductController {
 		// TODO Auto-generated method stub
 		return service.createProduct(product);
 	}
-	
+
 	@GetMapping("{id}")
 	public ProductEntity getProductbyID(@PathVariable long id) {
 		// TODO Auto-generated method stub
 		return service.getProductbyID(id);
 	}
-	
+
 	@PutMapping("{id}")
-	public ProductEntity updateProduct(@PathVariable long id,@RequestBody ProductEntity product) {
+	public ProductEntity updateProduct(@PathVariable long id, @RequestBody ProductEntity product) {
 		// TODO Auto-generated method stub
 		return service.updateProduct(id, product);
 	}
-	
+
 	@DeleteMapping("{id}")
 	public void deleteProductbyID(@PathVariable long id) {
 		// TODO Auto-generated method stub
 		service.deleteProductbyID(id);
 	}
-
 
 }
