@@ -12,6 +12,7 @@ import com.springbootcrud.data.dto.UserRegisterDTO;
 import com.springbootcrud.data.entity.UserEntity;
 import com.springbootcrud.data.mapper.UserMapper;
 import com.springbootcrud.exception.ExceptionCustom;
+import com.springbootcrud.exception.NotFoundException;
 import com.springbootcrud.repository.IUserRepository;
 import com.springbootcrud.services.IUserService;
 import com.springbootcrud.utils.Encoding;
@@ -37,7 +38,7 @@ public class UserServiceImpl implements IUserService {
 	public UserDTO updateUser(long id, UserDTO userDTO) {
 		// TODO Auto-generated method stub
 		UserEntity user = iUserRepository.findById(id)
-				.orElseThrow(() -> new ExceptionCustom("User", "Not Existed", "id", id));
+				.orElseThrow(() -> new NotFoundException("User do not existed"));
 
 		UserEntity userEntity = mapper.toEntity(userDTO);
 		userEntity.setId(id);
