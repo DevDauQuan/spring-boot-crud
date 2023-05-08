@@ -6,4 +6,5 @@ import com.springbootcrud.data.entity.UserEntity;
 
 public interface IUserRepository extends JpaRepository<UserEntity, Long> {
 	UserEntity findByUsername(String username);
+	
 }

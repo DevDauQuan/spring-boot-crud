@@ -2,18 +2,22 @@ package com.springbootcrud.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.springbootcrud.data.entity.*;
 
 public interface IProductService {
 
-	public List<ProductEntity> getAllProducts();
+	List<ProductEntity> getAllProducts();
 
-	public ProductEntity getProductbyID(long id);
+	ProductEntity getProductbyID(long id);
 
-	public ProductEntity createProduct(ProductEntity product);
+	ProductEntity createProduct(ProductEntity product);
 
-	public ProductEntity updateProduct(long id, ProductEntity product);
+	ProductEntity updateProduct(long id, ProductEntity product);
 
-	public void deleteProductbyID(long id);
+	void deleteProductbyID(long id);
+
+	Page<ProductEntity> getAllProducts(Integer no, Integer limit, String sortBy);
 
 }

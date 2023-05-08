@@ -24,9 +24,9 @@ public class ProductEntity {
 	private Long id;
 
 	@Column(name = "name")
-	private String name;
+	private String name;//unique
 
 	@Column(name = "discription")
-	private String discription;
+	private String discription;//unique
 
 }

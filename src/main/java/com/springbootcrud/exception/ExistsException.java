@@ -11,6 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NotFoundException extends RuntimeException {
+public class ExistsException extends RuntimeException {
 	private Map<String, String> errors;
 }

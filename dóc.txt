@@ -87,3 +87,12 @@ hashCode/equals, toString, v.v.
 Việc sử dụng Lombok giúp giảm thiểu lượng mã lặp và giúp cho mã nguồn của bạn trở nên 
 sáng sủa, ngắn gọn và dễ đọc hơn, đồng thời cải thiện năng suất và hiệu quả trong quá 
 trình phát triển.
+
+************************MAVEN*****************************
+"Maven" là một công cụ quản lý dự án phần mềm trong lập trình Java. Nó giúp quản lý và 
+tự động hóa việc tải và cài đặt các thư viện, plugin và các gói phụ thuộc (dependencies)
+ của dự án, đồng thời cung cấp các khả năng như biên dịch, kiểm tra và triển khai ứng dụng.
+
+Maven sử dụng file "pom.xml" để mô tả cấu trúc của dự án và các phụ thuộc của nó. Các 
+thư viện và plugin được quản lý bởi Maven được lưu trữ trong một kho chứa (repository)
+ trực tuyến, cho phép bạn dễ dàng tải về và sử dụng chúng trong dự án của mình.

@@ -1,5 +1,7 @@
 package com.springbootcrud.exception;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 
 import lombok.AllArgsConstructor;
@@ -14,5 +16,5 @@ import lombok.Setter;
 
 public class ErrorResponse {
 	private HttpStatus status;
-	private String message;
+	private Map<String, String> message;
 }
