@@ -1,5 +1,7 @@
 package com.springbootcrud.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,5 +17,8 @@ public interface IProductRepository extends JpaRepository<ProductEntity, Long> {
 //	@Query("SELECT COUNT(p) > 0 FROM ProductEntity p WHERE p.discription = :description")
 	boolean existsByDiscription(@Param(value = "discription") String discription);
 	
-	
+	@Query(value = "SELECT p FROM product p" 
+					+ "AND (:name IS NULL OR (p.name LIKE %:name))"
+					+ "AND (:discription IS NULL OR (p.discription LIKE %:discription))")
+	List<ProductEntity> findByNameContainingIgnoreCaseOrDiscriptionContainingIgnoreCase(@Param(value = "name")String name,@Param(value = "discription") String discription);
 }

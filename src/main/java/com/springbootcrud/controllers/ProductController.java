@@ -60,5 +60,11 @@ public class ProductController {
 		// TODO Auto-generated method stub
 		service.deleteProductbyID(id);
 	}
+	
+	@GetMapping("/search")
+    public List<ProductEntity> search(@RequestParam String name, @RequestParam String discription) {
+		return service.search(name, discription);
+    }
+	
 
 }

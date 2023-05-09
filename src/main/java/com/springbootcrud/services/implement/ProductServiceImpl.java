@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.springbootcrud.data.entity.*;
@@ -41,12 +42,11 @@ public class ProductServiceImpl implements IProductService {
 		// TODO Auto-generated method stub
 		if (iProductRepository.existsByName(product.getName())) {
 			errors.put("name", product.getName());
-			
 		}
-		if(iProductRepository.existsByDiscription(product.getDiscription())) {
+		if (iProductRepository.existsByDiscription(product.getDiscription())) {
 			errors.put("discription", product.getDiscription());
 		}
-		if(errors.isEmpty()) {			
+		if (errors.isEmpty()) {
 			return iProductRepository.save(product);
 		}
 		throw new ExistsException(errors);
@@ -74,6 +74,16 @@ public class ProductServiceImpl implements IProductService {
 		// TODO Auto-generated method stub
 		Sort sort = Sort.by(sortBy);
 		return iProductRepository.findAll(PageRequest.of(no, limit, sort));
+	}
+
+	@Override
+	public List<ProductEntity> search(String name, String discription) {
+		List<ProductEntity> products = iProductRepository.findByNameContainingIgnoreCaseOrDiscriptionContainingIgnoreCase(name, discription);
+        if (products.isEmpty()) {
+            return null;
+        } else {
+            return products;
+        }
 	}
 
 }

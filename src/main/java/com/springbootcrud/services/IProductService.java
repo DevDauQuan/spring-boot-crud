@@ -19,5 +19,7 @@ public interface IProductService {
 	void deleteProductbyID(long id);
 
 	Page<ProductEntity> getAllProducts(Integer no, Integer limit, String sortBy);
+	
+	List<ProductEntity> search(String name, String discription);
 
 }
