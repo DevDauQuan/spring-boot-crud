@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springbootcrud.data.dto.ProductDTO;
+import com.springbootcrud.data.dto.ProductSearchDTO;
 import com.springbootcrud.data.entity.ProductEntity;
 import com.springbootcrud.services.IProductService;
 
@@ -62,9 +63,22 @@ public class ProductController {
 		service.deleteProductbyID(id);
 	}
 
-	@PostMapping("/search")
-	public List<ProductDTO> search(@RequestBody ProductDTO productDTO) {
-		return service.search(productDTO);
+//	@PostMapping("/search")
+//	public List<ProductDTO> search(@RequestBody ProductSearchDTO productDTO) {
+//		return service.search(productDTO);
+//	}
+
+//	@GetMapping("/search")
+//	public List<ProductDTO> search(@RequestParam(required = false) String keyword,
+//			@RequestParam(required = false) String categoryName) {
+//		return service.search(keyword, categoryName);
+//	}
+
+	@GetMapping("/search")
+	public Page<ProductDTO> search(@RequestParam(required = false) String keyword,
+			@RequestParam(required = false) String categoryName,@RequestParam(defaultValue = "0") Integer no, @RequestParam(defaultValue = "10") Integer limit,
+			@RequestParam(defaultValue = "name") String sortBy) {
+		return service.search(keyword, categoryName, no, limit, sortBy);
 	}
 
 }

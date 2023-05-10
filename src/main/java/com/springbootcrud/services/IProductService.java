@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.springbootcrud.data.dto.ProductDTO;
+import com.springbootcrud.data.dto.ProductSearchDTO;
 import com.springbootcrud.data.entity.*;
 
 @Service
@@ -23,6 +24,6 @@ public interface IProductService {
 
 	Page<ProductEntity> getAllProducts(Integer no, Integer limit, String sortBy);
 
-	List<ProductDTO> search(ProductDTO productDTO);
+	Page<ProductDTO> search(String keyword,String categoryName,Integer no,Integer limit, String sortBy);
 
 }
