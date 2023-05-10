@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springbootcrud.data.dto.ProductDTO;
 import com.springbootcrud.data.entity.ProductEntity;
 import com.springbootcrud.services.IProductService;
 
@@ -25,7 +26,7 @@ public class ProductController {
 	IProductService service;
 
 	@GetMapping("")
-	public List<ProductEntity> getAllProducts() {
+	public List<ProductDTO> getAllProducts() {
 		// TODO Auto-generated method stub
 		return service.getAllProducts();
 	}

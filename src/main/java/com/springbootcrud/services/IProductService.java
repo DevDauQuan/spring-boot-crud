@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.springbootcrud.data.dto.ProductDTO;
 import com.springbootcrud.data.entity.*;
 
 public interface IProductService {
 
-	List<ProductEntity> getAllProducts();
+	List<ProductDTO> getAllProducts();
 
 	ProductEntity getProductbyID(long id);
 
