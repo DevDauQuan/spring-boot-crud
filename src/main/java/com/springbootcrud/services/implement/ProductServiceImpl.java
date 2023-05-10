@@ -82,9 +82,10 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public List<ProductEntity> search(String name, String discription) {
-		List<ProductEntity> products = iProductRepository
-				.findByNameContainingIgnoreCaseOrDiscriptionContainingIgnoreCase(name, discription);
+	public List<ProductDTO> search(ProductDTO productDTO) {
+		List<ProductDTO> products = iProductRepository.findByNameAndDescriptionAndCategoryName(productDTO).stream()
+				.map(p -> mapper.toDTO(p)).collect(Collectors.toList());
+
 		if (products.isEmpty()) {
 			return null;
 		} else {

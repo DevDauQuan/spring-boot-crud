@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.springbootcrud.data.dto.CategoryDTO;
 import com.springbootcrud.data.dto.ProductDTO;
+import com.springbootcrud.data.entity.Category;
 import com.springbootcrud.data.entity.ProductEntity;
 
 @Component
@@ -21,11 +22,18 @@ public class ProductMapper {
 		return dto;
 	}
 
-//	public ProductEntity toEntity(ProductDTO productDTO) {
-//		ProductEntity productEntity = new ProductEntity();
-//		productEntity.setName(productDTO.getName());
-//		productEntity.setDiscription(productDTO.getDiscription());
-//		productEntity.setCategory(productDTO.getCategoryDTO());
-//		return productEntity;
-//	}
+	public ProductEntity toEntity(ProductDTO productDTO) {
+		ProductEntity productEntity = new ProductEntity();
+		productEntity.setName(productDTO.getName());
+		productEntity.setDiscription(productDTO.getDiscription());
+
+		CategoryDTO categoryDTO = productDTO.getCategoryDTO();
+		Category categoryEntity = new Category();
+		categoryEntity.setId(categoryDTO.getId());
+		categoryEntity.setName(categoryDTO.getName());
+
+		productEntity.setCategory(categoryEntity);
+		return productEntity;
+	}
+
 }
