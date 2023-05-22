@@ -1,9 +1,7 @@
 package com.springbootcrud.services.implement;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import com.springbootcrud.data.dto.UserDTO;
 import com.springbootcrud.data.dto.UserRegisterDTO;
 import com.springbootcrud.data.entity.UserEntity;
 import com.springbootcrud.data.mapper.UserMapper;
-import com.springbootcrud.exception.NotFoundException;
+import com.springbootcrud.exception.CustomException;
 import com.springbootcrud.repository.IUserRepository;
 import com.springbootcrud.services.IUserService;
 import com.springbootcrud.utils.Encoding;
@@ -39,7 +37,7 @@ public class UserServiceImpl implements IUserService {
 	public UserDTO updateUser(long id, UserDTO userDTO) {
 		// TODO Auto-generated method stub
 		UserEntity user = iUserRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(null));
+				.orElseThrow(() -> new CustomException(null));
 		
 		UserEntity userEntity = mapper.toEntity(userDTO);
 		userEntity.setId(id);

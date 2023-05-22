@@ -96,3 +96,38 @@ tự động hóa việc tải và cài đặt các thư viện, plugin và các
 Maven sử dụng file "pom.xml" để mô tả cấu trúc của dự án và các phụ thuộc của nó. Các 
 thư viện và plugin được quản lý bởi Maven được lưu trữ trong một kho chứa (repository)
  trực tuyến, cho phép bạn dễ dàng tải về và sử dụng chúng trong dự án của mình.
+
+************************Circuit Breaker**************************
+Khi sử dụng Circuit Breaker, bạn cần xác định một ngưỡng ngắt (threshold) để đo lường 
+tình trạng hoạt động của dịch vụ. Ngưỡng ngắt có thể là số lượng yêu cầu thất bại, tỷ lệ lỗi,
+hay thời gian phản hồi quá lâu từ dịch vụ đó. Khi ngưỡng ngắt được vượt quá, Circuit Breaker 
+sẽ chuyển sang trạng thái "mở" (open) và từ chối các yêu cầu tới dịch vụ đó trong một khoảng 
+thời gian nhất định.
+
+Khi Circuit Breaker ở trạng thái "mở", một số hành động có thể được thực hiện để xử lý lỗi, 
+ví dụ như:
+
+Trả về kết quả mặc định: Circuit Breaker có thể trả về một giá trị mặc định hoặc thông tin 
+cố định để giảm tác động của dịch vụ không hoạt động lên các thành phần khác của hệ thống.
+
+Ghi log lỗi: Circuit Breaker có thể ghi log các thông tin liên quan đến lỗi, giúp phân tích
+và xác định nguyên nhân gây ra sự cố.
+
+Thông báo hoặc gửi cảnh báo: Circuit Breaker có thể thông báo cho các thành phần khác trong 
+hệ thống về sự cố xảy ra, giúp quản lý và giám sát hệ thống.
+
+Sau một khoảng thời gian nhất định, Circuit Breaker sẽ chuyển sang trạng thái "đóng" (closed) 
+và cho phép các yêu cầu tiếp tục được gửi tới dịch vụ. Nếu lỗi tiếp tục xảy ra, Circuit Breaker
+ có thể chuyển trạng thái "mở" để ngăn chặn các yêu cầu gây tác động tiêu cực lên hệ thống.
+
+Circuit Breaker cung cấp tính năng giám sát và bảo vệ cho các tương tác giữa các dịch vụ 
+trong hệ thống microservices. Bằng cách sử dụng Circuit Breaker, bạn có có thể xác định dịch
+ vụ nào gặp lỗi trong quá trình tương tác giữa các dịch vụ. Khi Circuit Breaker phát hiện
+ rằng một dịch vụ đạt đến ngưỡng ngắt, nó sẽ chuyển sang trạng thái "mở" và từ chối các 
+yêu cầu tiếp theo tới dịch vụ đó. Khi một yêu cầu bị từ chối, thông tin về lỗi có thể được 
+ghi log hoặc thông báo để ghi nhận và xử lý.
+
+Thông qua việc ghi log lỗi và thông báo, bạn có thể biết được dịch vụ nào đang gặp vấn đề. 
+Bạn có thể xem các thông tin ghi log để tìm hiểu nguyên nhân gây lỗi và định vị vị trí của 
+dịch vụ trong quá trình tương tác. Đồng thời, bạn cũng có thể thiết lập các cảnh báo để nhận 
+thông báo khi Circuit Breaker chuyển sang trạng thái "mở" và từ chối yêu cầu.

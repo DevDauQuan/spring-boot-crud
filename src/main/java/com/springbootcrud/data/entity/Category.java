@@ -29,7 +29,7 @@ public class Category {
 
 	private String name;
 	
-//	@JsonBackReference
+	@JsonBackReference
 	@OneToMany(mappedBy = "category")
 	private List<ProductEntity> products;
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springbootcrud.data.dto.ProductDTO;
-import com.springbootcrud.data.dto.ProductSearchDTO;
 import com.springbootcrud.data.entity.ProductEntity;
 import com.springbootcrud.services.IProductService;
 
@@ -27,22 +27,23 @@ public class ProductController {
 	IProductService service;
 
 	@GetMapping("")
-	public List<ProductDTO> getAllProducts() {
-		// TODO Auto-generated method stub
-		return service.getAllProducts();
+	public ResponseEntity<List<ProductDTO>> getAllProducts() {
+		List<ProductDTO> products = service.getAllProducts();
+		return ResponseEntity.ok(products);
 	}
 
 	@GetMapping("/page")
-	public Page<ProductEntity> getAllProducts(@RequestParam Integer no, @RequestParam Integer limit,
+	public ResponseEntity<Page<ProductEntity>> getAllProducts(@RequestParam Integer no, @RequestParam Integer limit,
 			@RequestParam String sortBy) {
-		// TODO Auto-generated method stub
-		return service.getAllProducts(no, limit, sortBy);
+		Page<ProductEntity> productsPage = service.getAllProducts(no, limit, sortBy);
+		return ResponseEntity.ok(productsPage);
 	}
 
 	@PostMapping("")
-	public ProductEntity createProduct(@RequestBody ProductEntity product) {
+	public ResponseEntity<ProductEntity> createProduct(@RequestBody ProductEntity product) {
 		// TODO Auto-generated method stub
-		return service.createProduct(product);
+		ProductEntity entity = service.createProduct(product);
+		return ResponseEntity.ok(entity);
 	}
 
 	@GetMapping("{id}")
@@ -76,8 +77,8 @@ public class ProductController {
 
 	@GetMapping("/search")
 	public Page<ProductDTO> search(@RequestParam(required = false) String keyword,
-			@RequestParam(required = false) String categoryName,@RequestParam(defaultValue = "0") Integer no, @RequestParam(defaultValue = "10") Integer limit,
-			@RequestParam(defaultValue = "name") String sortBy) {
+			@RequestParam(required = false) String categoryName, @RequestParam(defaultValue = "0") Integer no,
+			@RequestParam(defaultValue = "10") Integer limit, @RequestParam(defaultValue = "name") String sortBy) {
 		return service.search(keyword, categoryName, no, limit, sortBy);
 	}
 

@@ -1,23 +1,19 @@
 package com.springbootcrud.services.implement;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.springbootcrud.data.dto.ProductDTO;
-import com.springbootcrud.data.dto.ProductSearchDTO;
 import com.springbootcrud.data.entity.ProductEntity;
 import com.springbootcrud.data.mapper.ProductMapper;
-import com.springbootcrud.exception.ExistsException;
+import com.springbootcrud.exception.CustomException;
 import com.springbootcrud.repository.IProductRepository;
 import com.springbootcrud.services.IProductService;
 
@@ -40,23 +36,19 @@ public class ProductServiceImpl implements IProductService {
 	@Override
 	public ProductEntity getProductbyID(long id) {
 		// TODO Auto-generated method stub
-		return iProductRepository.findById(id).get();
+		return iProductRepository.findById(id).orElseThrow(()-> new CustomException("Product do not exist"));
 	}
 
 	@Override
 	public ProductEntity createProduct(ProductEntity product) {
-		Map<String, String> errors = new HashMap<String, String>();
 		// TODO Auto-generated method stub
 		if (iProductRepository.existsByName(product.getName())) {
-			errors.put("name", product.getName());
+			throw new CustomException("Existed Name " + product.getName());
 		}
 		if (iProductRepository.existsByDiscription(product.getDiscription())) {
-			errors.put("discription", product.getDiscription());
+			throw new CustomException("Existed Description " + product.getDiscription());
 		}
-		if (errors.isEmpty()) {
-			return iProductRepository.save(product);
-		}
-		throw new ExistsException(errors);
+		return iProductRepository.save(product);
 	}
 
 	@Override
@@ -128,7 +120,8 @@ public class ProductServiceImpl implements IProductService {
 			keyword = keyword.toLowerCase();
 		}
 		Sort sort = Sort.by(sortBy);
-		return iProductRepository.filter(keyword, categoryName, PageRequest.of(no, limit, sort)).map(p-> mapper.toDTO(p));
+		return iProductRepository.filter(keyword, categoryName, PageRequest.of(no, limit, sort))
+				.map(p -> mapper.toDTO(p));
 
 	}
 

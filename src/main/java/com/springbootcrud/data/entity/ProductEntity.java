@@ -34,7 +34,7 @@ public class ProductEntity {
 	@Column(name = "discription")
 	private String discription;//unique
 	
-//	@JsonBackReference
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="category_id")
 	private Category category;
